@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{lipsum}
+\usepackage{amsmath}
 
 % Configuración de la página
 \pagestyle{fancy}
@@ -22,13 +23,13 @@
     \vspace*{2cm}
     {\includegraphics[width=8cm]{imagenes/logo.png}\par} % Ajusta el nombre de la imagen y su tamaño
     \vspace{1cm}
-    {\Huge Título del Documento\par}
+    {\Huge LAB1: Diseño de sistemas digitales\par}
     \vspace{2cm}
-    {\Large Autor: Tu Nombre\par}
+    {\Large Jonatan Stiven Restrepo Lora\par}
     \vspace{0.5cm}
-    {\Large Coautor: Otro Nombre\par} % Agrega el nombre del otro autor
+    {\Large Otro Nombre\par} % Agrega el nombre del otro autor
     \vspace{0.5cm}
-    {\Large Universidad\par} % Agrega el nombre de la universidad
+    {\Large Universidad de Antioquia\par} % Agrega el nombre de la universidad
     \vfill
     {\large \today\par}
 \end{titlepage}
@@ -98,5 +99,216 @@ fase del algoritmo se encuentra y el estado de la máquina.
 \end{figure}
 
 \subsection{Contador par}
+Se creó un contador par, el cual da las posiciones $\eta = \{ 0, 2, 4, 6, 8, 10, 12, 14 \}$, esto con el 
+fin de seguir con la lógica implementada en el vector donde se retorna los números en las posiciones 
+$A_n$ \& $A_{n+1}$.
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/contador_par_diagrama.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Diagrama contador par} % Agrega la leyenda aquí
+    \label{fig:diagramacontadorpar} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+\newpage
 
+Para llevar a cabo la implementación de dicho contador sé continuo con la creación de la tabla extendida 
+y la simplificación con los mapas K.
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth} % ajusta el ancho de la primera imagen
+      \centering
+      \includegraphics[width=\linewidth]{imagenes/CONTADOR_PAR_TABLA.png} % reemplaza "imagen1" con el nombre de tu primera imagen
+      \caption{Tabla extendida contador par}
+      \label{fig:tablacontadorpar}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth} % ajusta el ancho de la segunda imagen
+      \centering
+      \includegraphics[width=\linewidth]{imagenes/contador_par_circuito.png} % reemplaza "imagen2" con el nombre de tu segunda imagen
+      \caption{Circuito contador par}
+      \label{fig:circuitocontadorpar}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth} % ajusta el ancho de la primera imagen
+      \centering
+      \includegraphics[width=\linewidth]{imagenes/mapask_contador_par_1.png} % reemplaza "imagen1" con el nombre de tu primera imagen
+      \caption{Mapas K contador par}
+      \label{fig:mapaskcontadorpar}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth} % ajusta el ancho de la segunda imagen
+      \centering
+      \includegraphics[width=\linewidth]{imagenes/mapask_contador_par_2.png} % reemplaza "imagen2" con el nombre de tu segunda imagen
+      \caption{Mapas K contador par}
+      \label{fig:mapaskcontadorpar}
+    \end{minipage}
+\end{figure}
+\newpage
+
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/mapask_contador_par_3.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{mapas k contador par} % Agrega la leyenda aquí
+    \label{fig:mapaskcontadorpar} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+Las expresiones simplificadas son las siguientes:
+\begin{itemize}
+    \item $J3 = Q2 \cdot Q1$
+    \item $K3 = Q2 \cdot Q1$
+    \item $J2 = Q1$
+    \item $K2 = Q1$
+    \item $J1 = 1$
+    \item $K1 = 1$
+    \item $J0 = 0$
+    \item $K0 = X$
+\end{itemize}
+
+\section{Visualizador}
+Para poder cumplir con las especificaciones de poder ver los números $A_n$ \& $A_{n+1}$ en cada ciclo 
+del algoritmo, la suma correspondiente al mismo ciclo, la face del algoritmo y el estado actual de la máquina, 
+fue necesario crear los siguientes componentes:
+
+\subsection{Decodificador 7 segmentos}
+Se creó un decodificador de 7 segmentos el cual recibe 4 bits y representa los valores de 0 al 9.
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/circuito_deco.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Circuito Decodificador 7 segmentos} % Agrega la leyenda aquí
+    \label{fig:deco7seg} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+\newpage
+
+\subsection{Complemento a 2}
+Se construyo un circuito que hiciera el complemento a 2, para una entrada de 8 bits. Dicho complemento 
+funciona solo para números negativos.
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/complemento_2.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Circuito Complemento a dos} % Agrega la leyenda aquí
+    \label{fig:complemento} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+
+\subsection{Construcción Visualizador}
+Los componentes anteriores fueron necesarios para poder crear un componente que me permitiera obtener 
+las unidades, decenas y centenas de un número, así como también su signo:
+\newpage
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.45\textwidth} % ajusta el ancho de la primera imagen
+      \centering
+      \includegraphics[width=\linewidth]{imagenes/view_number.png} % reemplaza "imagen1" con el nombre de tu primera imagen
+      \caption{Circuito desglosé número}
+      \label{fig:viewnumber}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth} % ajusta el ancho de la segunda imagen
+      \centering
+      \includegraphics[width=\linewidth]{imagenes/view_number_selector.png} % reemplaza "imagen2" con el nombre de tu segunda imagen
+      \caption{Circuito unificado}
+      \label{fig:viewnumberunificado}
+    \end{minipage}
+\end{figure}
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/view_number_full.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Resultado Visualizador} % Agrega la leyenda aquí
+    \label{fig:visualizadorfull} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+
+\section{Máquina de estados}
+Para poder llevar a cabo el algoritmo de reducción, se construyo una máquina de estados, dependiendo de la 
+entrada de 2 bits que, representa la fase en la que se encuentra, realiza cierta cantidad de ciclos y cuando 
+termine genera una salida de \textbf{1}, para de esta forma poder controlar el reset de los contadores y otros 
+componentes:
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/diagrama_maquina_estados.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Diagrama máquina de estados} % Agrega la leyenda aquí
+    \label{fig:diagramaestados} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+\newpage
+
+Como el algoritmo para la suma es de complejidad algorítmica $O(\log_2(n))$, significa que para las 16 
+posiciones del vector, solo usaremos como máximo 8 estados para la primera iteración, 4 para la segunda, 
+2 para la tercera, 1 para la última fase, teniendo en cuanta lo anterior, se evidencia solo 8 estados 
+en la máquina.
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.5\textwidth]{imagenes/TABLA.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Tabla extendida de la maquina de estados} % Agrega la leyenda aquí
+    \label{fig:tablaestados} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/mapask_estados.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Mapas K de la máquina de estados} % Agrega la leyenda aquí
+    \label{fig:mapaskestados} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+\newpage
+
+\textbf{Expresiones minimizadas:}
+
+\begin{align*}
+    J0 &= X' + Y' \\
+    J1 &= X' + Q0 \\
+    J2 &= Y' \cdot Q1 \cdot Q0 \\
+    K0 &= 1 \\
+    K1 &= Q0 \\
+    K2 &= Q1 \cdot Q0 \\
+    Z &= Q2 \cdot Q1 \cdot Q0 + Y \cdot Q1 \cdot Q0 + X \cdot Q0 + X \cdot Y
+\end{align*}
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/circuito_estados.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Circuito maquina de estados} % Agrega la leyenda aquí
+    \label{fig:circuitoestados} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+
+\section{Ensamble circuito}
+Teniendo en cuenta los componentes antes presentados, se procede a ensamblar cada uno de ellos para poner en 
+funcionamiento el algoritmo de suma para un vector de 16 posiciones con 8 bits de entrada.
+
+\subsection{Visualizador}
+Con base a los vizualizadores pasados, se construyo uno por cada elemento requerido: 
+\textbf{\textit{Número $A_n$ y $A_{n+1}$ del vector, Suma de los números, Fase del algoritmo, Estado actual de la máquina de estados.}}
+\newpage
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/visualizador.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Visualizador de los elementos} % Agrega la leyenda aquí
+    \label{fig:Visualizador} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+\subsection{implementación}
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/circuito_full.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Implementacion del circuito} % Agrega la leyenda aquí
+    \label{fig:circuitofull} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+
+Todos los \textbf{contadores} funcionan con flancos de reloj de bajada, para así permitir que el resultado 
+de sumar el número $A_n$ \& $A_{n+1}$ se pueda guardar en la posición $\eta$ del vector.
+El vector guarda los números con flancos de subida del reloj, de esta manera diario estará guardando los 
+datos en la posición correcta.
+Con respecto al flip-flop Jk usado, este permite que la última suma correspondiente al estado de la máquina 
+se guarda en la posición correcta, dado que por el diseño de la misma cuando está en el último estado activa
+la salida que produce un reset en los contadores.
+\newpage
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagenes/ultimo_ciclo.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Uso del flip-flop para retardar el reset.} % Agrega la leyenda aquí
+    \label{fig:ultimociclo} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
+
+Por último se configuró el circuito para que se detuviera cuando estuviera en la última fase del algoritmo
+y así evitar que este corra indefinidamente provocando desbordamiento.
+\begin{figure}[h] % "h" indica que la figura se coloque aquí, aunque LaTeX puede ajustar su posición
+    \centering
+    \includegraphics[width=0.3\textwidth]{imagenes/control.png} % Ajusta el nombre de la imagen y el ancho según sea necesario
+    \caption{Control fin del algoritmo} % Agrega la leyenda aquí
+    \label{fig:control} % Etiqueta para hacer referencia a la figura en el texto
+\end{figure}
 \end{document}
